@@ -1,0 +1,12 @@
+import arcpy
+from arcpy import env
+import os
+
+env.workspace = r"D:\data\john_pc2\projeto_modelagem_canastra\corredores_paisagem1"
+arcpy.env.extent = "335900 7745100 371800 7775800"
+# Process: Convert to ascii
+rasterList = arcpy.ListRasters()
+for rt in rasterList:
+ofile2=unicode(""+os.path.splitext(rt)[0]+"_s1.img")
+print rt + " - " + ofile2
+arcpy.gp.RasterCalculator_sa("Con(\"%rt%\" == 0,-9999,\"%rt%\")", ofile2)

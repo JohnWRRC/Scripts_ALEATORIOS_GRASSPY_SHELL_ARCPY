@@ -1,0 +1,14 @@
+import arcpy
+from arcpy import env
+import os
+
+env.workspace = r"F:\data\john_pc2\conect_brac_2014\newLocation\saidas"
+arcpy.env.extent = "330400 7743500.00012207 380510 7779230.00012207"
+# Process: Convert to ascii
+rasterList = arcpy.ListRasters()
+
+env.workspace = r"F:\data\john_pc2\conect_brac_2014\newLocation\saidas\asci"
+for rt in rasterList:
+    ofile2=unicode(""+os.path.splitext(rt)[0]+".asc")
+    print rt + " - " + ofile2
+    arcpy.RasterToASCII_conversion(rt, ofile2)

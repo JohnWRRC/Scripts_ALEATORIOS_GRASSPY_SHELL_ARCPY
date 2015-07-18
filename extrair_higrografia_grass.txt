@@ -1,0 +1,15 @@
+cd ""
+g.region rast=22S48_ZN_WGS_utm_23S
+
+g.region n=7505000 s=7490000 w=220000 e=240000
+
+r.slope.aspect 	elevation=22S48_ZN_WGS_utm_23S  slope=22S48_ZN_WGS_utm_23S_slopasp_slope aspect=22S48_ZN_WGS_utm_23S_slopasp_aspect --o
+
+
+r.watershed elevation=22S48_ZN_WGS_utm_23S accumulation=22S48_ZN_WGS_utm_23S_watershed_accumulation --o
+
+r.watershed elevation=22S48_ZN_WGS_utm_23S basin=22S48_ZN_WGS_utm_23S_watershed_basin_02500 threshold=2500 --o
+r.watershed elevation=22S48_ZN_WGS_utm_23S basin=22S48_ZN_WGS_utm_23S_watershed_basin_05000 threshold=5000 --o
+r.watershed elevation=22S48_ZN_WGS_utm_23S basin=22S48_ZN_WGS_utm_23S_watershed_basin_10000 threshold=10000 --o
+
+r.watershed elevation=22S48_ZN_WGS_utm_23S stream=22S48_ZN_WGS_utm_23S_watershed_stream threshold=2000 --o

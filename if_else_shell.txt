@@ -1,0 +1,40 @@
+listcheck=`g.mlist pattern="(31_avg_asc*)" sep="comma" `
+listmult1=`g.mlist pattern="(31_avg_asc*)" sep="comma" `
+listmult2=`g.mlist pattern="(custo_aux*)" sep="comma" `
+
+listcheck="custo_nivel2"
+
+
+
+
+
+
+
+
+
+
+
+
+VALID_PASSWORD="secret" #this is our password.
+
+echo "Please enter the password:"
+read PASSWORD
+
+
+
+for i in $listcheck
+do
+      echo $i
+done
+
+
+cd "F:\data\john_pc2\projeto_modelagem_canastra\grass\newLocation\PERMANENT\cell"
+
+for i in $listcheck
+do
+   if [ -s $i ]; then
+      echo "este arquivo existe"
+   else
+      echo "nao existe"
+   fi
+done

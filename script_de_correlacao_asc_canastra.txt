@@ -1,0 +1,106 @@
+setwd("D:\\data\\john_pc2\\projeto_modelagem_canastra\\rasters_saidas_grass")
+
+memory.size(max=TRUE)
+require(raster)
+
+ #install.packages("raster")
+
+
+clip_20110421_219_074_ndvi_tif_float<-raster("clip_20110421_219_074_ndvi_tif_float.asc")
+clip_20110928_219_074_ndvi_tif_float<-raster("clip_20110928_219_074_ndvi_tif_float.asc")
+clip_hidro_eucdist_tif_float<-raster("clip_hidro_eucdist_tif_float.asc")
+dist_campo_pasto_tif_float<-raster("dist_campo_pasto_tif_float.asc")
+flow_acumulation_mosaic_tif_float<-raster("flow_acumulation_mosaic_tif_float.asc")
+focos_masck_bin_tif_moviwindow_101px_float<-raster("focos_masck_bin_tif_moviwindow_101px_float.asc")
+
+
+cor(clip_20110421_219_074_ndvi_tif_float, clip_20110928_219_074_ndvi_tif_float)
+
+
+
+
+#########
+image(focos_masck_bin_tif_moviwindow_101px_float, col=rainbow(100))
+#########
+
+
+
+clip_20110421_219_074_ndvi_tif_float_val<-c(as.matrix(clip_20110421_219_074_ndvi_tif_float))    
+
+clip_20110928_219_074_ndvi_tif_float_val<-c(as.matrix(clip_20110928_219_074_ndvi_tif_float)) 
+
+clip_hidro_eucdist_tif_float_val<-c(as.matrix(clip_hidro_eucdist_tif_float))
+
+
+dist_campo_pasto_tif_float_val<-c(as.matrix(dist_campo_pasto_tif_float))
+
+
+flow_acumulation_mosaic_tif_float_val<-c(as.matrix(flow_acumulation_mosaic_tif_float))
+
+
+focos_masck_bin_tif_moviwindow_101px_float_val<-c(as.matrix(focos_masck_bin_tif_moviwindow_101px_float))
+
+
+
+
+
+
+
+#head(veg_bin_img_float_mw_21px_val)
+# hist(veg_bin_img_float_mw_21px_val) 
+
+
+
+################## na linha abaixo incluir TODAS as variaveis que se tem interesse..
+
+tabela<-data.frame(cbind(clip_20110421_219_074_ndvi_tif_float_val, clip_20110928_219_074_ndvi_tif_float_val, clip_hidro_eucdist_tif_float_val, dist_campo_pasto_tif_float_val, flow_acumulation_mosaic_tif_float_val, focos_masck_bin_tif_moviwindow_101px_float_val ))
+ 
+valores_soma<-rowSums(tabela)
+
+nrow(tabela)
+length(valores_soma)
+
+
+valores_soma_validos<-  1:nrow(tabela)
+head(valores_soma_validos,500)
+
+valores_soma_validos<-ifelse(is.na(valores_soma), NA, valores_soma_validos)
+head(valores_soma_validos,500)
+
+valores_soma_validos<-subset(valores_soma_validos, valores_soma_validos>0)
+
+
+tabela_validos <- tabela [valores_soma_validos  ,   ]
+
+
+head(tabela)
+head(tabela_validos)
+
+
+#plot (cana_bin_img_mw_21px_val, cerrado_bin_img_float_mw_21px_val, pch=19, cex=0.1)
+
+colnames(tabela_validos) <-gsub("clip_20110421_219_074_ndvi_tif_float_val","ndvi_04", colnames(tabela_validos))
+colnames(tabela_validos) <-gsub("bin_img_float_mw_21px_val","21px", colnames(tabela_validos))
+colnames(tabela_validos) <-gsub("bin_float_mw_21px_val","21px", colnames(tabela_validos))
+colnames(tabela_validos) <-gsub("albers_21px","21px", colnames(tabela_validos))
+colnames(tabela_validos) <-gsub("eucdist_saida_grass_val","", colnames(tabela_validos))
+
+
+
+round(cor(tabela_validos) , 3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

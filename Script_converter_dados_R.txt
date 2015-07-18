@@ -1,0 +1,9 @@
+setwd ("D:\\data\\john_pc2\\Gio_banco_de _dados\\Gio_estradas_saidas_grass_2013_11_d12")
+require(maptools)
+mapa <- readShapePoints("pontos_ocorrencia_shp.shp")
+mapa_tab <- mapa@data
+
+mapa_tab$alb_x <- coordinates(mapa)[,1]
+mapa_tab$alb_y <- coordinates(mapa)[,2]
+
+write.table(mapa_tab,file= "mapa_tab3.csv", sep = ",", row.names=F, append=F, quote=F, col.names=T) 

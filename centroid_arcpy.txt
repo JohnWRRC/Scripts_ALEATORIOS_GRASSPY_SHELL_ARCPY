@@ -1,0 +1,21 @@
+import arcpy
+
+input_fc = "D:\\data\\john_pc2\\projeto_modelagem_canastra\\shps\\masca_1.shp"
+output_fc = "D:\\data\\john_pc2\\projeto_modelagem_canastra\\shps"
+
+cursor = arcpy.da.SearchCursor(input_fc, "SHAPE@XY")
+centroid_coords = []
+for feature in cursor:
+    centroid_coords.append(feature[0])
+
+point = arcpy.Point()
+pointGeometryList = []
+
+for pt in centroid_coords:
+    point.X = pt[0]
+    point.Y = pt[1]
+
+    pointGeometry = arcpy.PointGeometry(point)
+    pointGeometryList.append(pointGeometry)
+
+arcpy.CopyFeatures_management(pointGeometryList, output_fc)

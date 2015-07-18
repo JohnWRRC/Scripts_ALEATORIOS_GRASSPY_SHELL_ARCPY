@@ -1,0 +1,7 @@
+xcoord<-seq(from=492000, to=495000, by=500)
+ycoord<-seq(from=8322000, to=8325000, by=500)
+
+
+tab<-merge(xcoord, ycoord)
+
+plot(tab)

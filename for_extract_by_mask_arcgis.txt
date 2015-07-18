@@ -1,0 +1,13 @@
+import arcpy
+from arcpy import env
+import os
+
+custo = "D:\\data\\john_pc2\\projeto_modelagem_canastra\\mask\\cenas_juncao_v02_reclass_corrigida_v03.tif"
+env.workspace = r"D:\data\john_pc2\projeto_modelagem_canastra\corredores_paisagem1"
+arcpy.env.extent = "335900 7745100 371800 7775800"
+# Process: Convert to ascii
+rasterList = arcpy.ListRasters()
+for rt in rasterList:
+ofile2=unicode(""+os.path.splitext(rt)[0]+"_custo.img")
+print rt + " - " + ofile2
+ arcpy.gp.ExtractByMask_sa(custo, rt , ofile2)
